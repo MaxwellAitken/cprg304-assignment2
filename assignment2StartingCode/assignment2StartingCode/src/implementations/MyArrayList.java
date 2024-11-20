@@ -1,6 +1,3 @@
-/**
- * 
- */
 package implementations;
 
 import java.util.NoSuchElementException;
@@ -9,9 +6,14 @@ import utilities.Iterator;
 import utilities.ListADT;
 
 /**
- * This is an implementation for the class MyArrayList.
- * It uses the ListADT and Iterator interfaces and an 
- * array as the underlying data structure.
+ * MyArrayList.java
+ * 
+ * @author Team Purah
+ * @version 1.0
+ * 
+ * Class Description: Implementation of an Array List. It uses the
+ * ListADT and Iterator interfaces and an array as the underlying data
+ * structure.
  */
 public class MyArrayList<E> implements ListADT<E>
 {
@@ -21,7 +23,7 @@ public class MyArrayList<E> implements ListADT<E>
 	// Attributes
 	private E[] array;
 	private int size;
-	
+
 	// Constructors
 	/**
 	 * Constructs an empty MyArrayList.
@@ -48,7 +50,7 @@ public class MyArrayList<E> implements ListADT<E>
 	@Override
 	public void clear()
 	{
-		for ( int i = 0; i < size; i++ ) 
+		for ( int i = 0; i < size; i++ )
 		{
 			array[i] = null;
 		}
@@ -62,7 +64,7 @@ public class MyArrayList<E> implements ListADT<E>
 	{
 		array = java.util.Arrays.copyOf( array, newSize );
 	}
-	
+
 	/**
 	 * Adds a specified element to a specified position of the list.
 	 */
@@ -73,26 +75,26 @@ public class MyArrayList<E> implements ListADT<E>
 		{
 			throw new NullPointerException( "Cannot add null element" );
 		}
-		
+
 		if ( index < 0 || index > size )
 		{
 			throw new IndexOutOfBoundsException( "Index: '" + index + "' out of bounds" );
 		}
-		
-		if ( size == array.length)
+
+		if ( size == array.length )
 		{
 			resize( array.length + 1 );
 		}
-		
+
 		for ( int i = size; i > index; i-- )
 		{
 			array[i] = array[i - 1];
 		}
-		
+
 		array[index] = toAdd;
-		
+
 		size++;
-		
+
 		return true;
 	}
 
@@ -111,7 +113,7 @@ public class MyArrayList<E> implements ListADT<E>
 		{
 			resize( array.length + 1 );
 		}
-		
+
 		array[size++] = toAdd;
 
 		return true;
@@ -125,20 +127,20 @@ public class MyArrayList<E> implements ListADT<E>
 	{
 		if ( toAdd == null )
 		{
-			throw new NullPointerException( "Cannot add null element" );
+			throw new NullPointerException( "Cannot add null collection" );
 		}
-		
-		int toAddSize = toAdd.size();
-		
-		if ( size + toAddSize > array.length ) 
-		{
-	        resize( size + toAddSize );
-	    }
 
-	    for ( int i = 0; i < toAddSize; i++ ) 
-	    {
-	        array[size++] = toAdd.get(i);
-	    }
+		int toAddSize = toAdd.size();
+
+		if ( size + toAddSize > array.length )
+		{
+			resize( size + toAddSize );
+		}
+
+		for ( int i = 0; i < toAddSize; i++ )
+		{
+			array[size++] = toAdd.get( i );
+		}
 
 		return true;
 	}
@@ -167,18 +169,18 @@ public class MyArrayList<E> implements ListADT<E>
 		{
 			throw new IndexOutOfBoundsException( "Index: '" + index + "' out of bounds" );
 		}
-		
+
 		E removedElement = array[index];
 
-		for ( int i = index; i < size - 1; i++ ) 
+		for ( int i = index; i < size - 1; i++ )
 		{
-	        array[i] = array[i + 1];
-	    }
-		
+			array[i] = array[i + 1];
+		}
+
 		array[size - 1] = null;
 
 		size--;
-		
+
 		return removedElement;
 	}
 
@@ -192,57 +194,57 @@ public class MyArrayList<E> implements ListADT<E>
 		{
 			throw new NullPointerException( "Cannot remove null element" );
 		}
-		
+
 		int index = -1;
-		for ( int i = 0; i < size; i++ ) 
+		for ( int i = 0; i < size; i++ )
 		{
-	        if ( array[i].equals(toRemove) ) 
-	        {
-	            index = i;
-	            break;
-	        }
-	    }
+			if ( array[i].equals( toRemove ) )
+			{
+				index = i;
+				break;
+			}
+		}
 
-	    if ( index == -1 ) 
-	    {
-	        return null;
-	    }
+		if ( index == -1 )
+		{
+			return null;
+		}
 
-	    E removedElement = array[index];
+		E removedElement = array[index];
 
-	    for ( int i = index; i < size - 1; i++ ) 
-	    {
-	        array[i] = array[i + 1];
-	    }
+		for ( int i = index; i < size - 1; i++ )
+		{
+			array[i] = array[i + 1];
+		}
 
-	    array[size - 1] = null;
+		array[size - 1] = null;
 
-	    size--;
+		size--;
 
-	    return removedElement;
+		return removedElement;
 	}
 
 	/**
-	 * Replaces the element at a specified position in the list with 
-	 * the specified element.
+	 * Replaces the element at a specified position in the list with the specified
+	 * element.
 	 */
 	@Override
 	public E set( int index, E toChange ) throws NullPointerException, IndexOutOfBoundsException
 	{
 		if ( toChange == null )
 		{
-			throw new NullPointerException( "Cannot add null element" );
+			throw new NullPointerException( "Cannot set to null element" );
 		}
-		
+
 		if ( index < 0 || index >= size )
 		{
 			throw new IndexOutOfBoundsException( "Index: '" + index + "' out of bounds" );
 		}
-		
+
 		E oldElement = array[index];
-		
+
 		array[index] = toChange;
-		
+
 		return oldElement;
 	}
 
@@ -263,16 +265,16 @@ public class MyArrayList<E> implements ListADT<E>
 	{
 		if ( toFind == null )
 		{
-			throw new NullPointerException( "Cannot add null element" );
-		} 
-		
-		for ( int i = 0; i < size; i++ ) 
+			throw new NullPointerException( "Cannot search for null element" );
+		}
+
+		for ( int i = 0; i < size; i++ )
 		{
-	        if ( array[i].equals(toFind) ) 
-	        {
-	            return true;
-	        }
-	    }
+			if ( array[i].equals( toFind ) )
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -284,21 +286,21 @@ public class MyArrayList<E> implements ListADT<E>
 	{
 		if ( toHold == null )
 		{
-			throw new NullPointerException( "Cannot add null element" );
-		} 
-		
-		if ( toHold.length >= size ) 
+			throw new NullPointerException( "Cannot store to null array" );
+		}
+
+		if ( toHold.length >= size )
 		{
-	        System.arraycopy( array, 0, toHold, 0, size );
-	        return toHold;
-	    } 
-		
-		else 
-	    {
+			System.arraycopy( array, 0, toHold, 0, size );
+			return toHold;
+		}
+
+		else
+		{
 			E[] newArray = (E[]) new Object[size];
-	        System.arraycopy( array, 0, newArray, 0, size );
-	        return newArray;
-	    }
+			System.arraycopy( array, 0, newArray, 0, size );
+			return newArray;
+		}
 	}
 
 	/**
@@ -308,10 +310,10 @@ public class MyArrayList<E> implements ListADT<E>
 	public Object[] toArray()
 	{
 		Object[] newArray = new Object[size];
-    
-	    System.arraycopy(array, 0, newArray, 0, size);
-	    
-	    return newArray;
+
+		System.arraycopy( array, 0, newArray, 0, size );
+
+		return newArray;
 	}
 
 	/**
@@ -322,27 +324,27 @@ public class MyArrayList<E> implements ListADT<E>
 	{
 		return new MyListIterator();
 	}
-	
+
 	// Inner classes
-	private class MyListIterator implements Iterator<E> 
+	private class MyListIterator implements Iterator<E>
 	{
-        private int currentIndex = 0;
+		private int currentIndex = 0;
 
-        @Override
-        public boolean hasNext() 
-        {
-            return currentIndex < size;
-        }
+		@Override
+		public boolean hasNext()
+		{
+			return currentIndex < size;
+		}
 
-        @Override
-        public E next() throws NoSuchElementException
-        {
-            if ( !hasNext() ) 
-            {
-                throw new NoSuchElementException( "No more elements to iterate" );
-            }
-            return array[currentIndex++];
-        }
-    }
+		@Override
+		public E next() throws NoSuchElementException
+		{
+			if ( !hasNext() )
+			{
+				throw new NoSuchElementException( "No more elements to iterate" );
+			}
+			return array[currentIndex++];
+		}
+	}
 
 }
