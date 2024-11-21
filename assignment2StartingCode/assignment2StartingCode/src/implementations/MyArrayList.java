@@ -1,6 +1,5 @@
 package implementations;
 
-import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import utilities.Iterator;
