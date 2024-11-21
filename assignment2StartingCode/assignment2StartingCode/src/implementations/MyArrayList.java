@@ -1,5 +1,6 @@
 package implementations;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import utilities.Iterator;
@@ -310,9 +311,7 @@ public class MyArrayList<E> implements ListADT<E>
 	public Object[] toArray()
 	{
 		Object[] newArray = new Object[size];
-
 		System.arraycopy( array, 0, newArray, 0, size );
-
 		return newArray;
 	}
 

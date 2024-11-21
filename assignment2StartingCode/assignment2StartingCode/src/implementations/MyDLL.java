@@ -25,6 +25,12 @@ public class MyDLL<E> implements ListADT<E>
 	private MyDLLNode<E> tail;
 	private int size;
 
+	// Getters and Setters
+	public MyDLLNode<E> getHead()
+	{
+		return head;
+	}
+
 	// Constructors
 	/**
 	 * Constructs an empty MyDLL
