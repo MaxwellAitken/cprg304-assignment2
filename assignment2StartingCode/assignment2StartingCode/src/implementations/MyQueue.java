@@ -66,7 +66,7 @@ public class MyQueue<E> implements QueueADT<E>
 	{
 		if ( isEmpty() )
 		{
-			throw new EmptyQueueException( "Cannot dequeue from empty queue" );
+			throw new EmptyQueueException( "Cannot peek empty queue" );
 		}
 		return list.get( 0 );
 	}
